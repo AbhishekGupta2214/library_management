@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Adding Books</title>
+    <style>
+      .container {
+        width: 400px;
+        margin: auto;
+        text-align: center;
+      }
+      .col-12 {
+        display: flex;
+        justify-content: center;
+        text-align: center;
+      }
+      table {
+        width: 100%;
+      }
+      table,
+      th,
+      td,
+      input,
+      textarea {
+        border: 2px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h3>Add Your Book</h3>
+      <hr />
+      <div class="col-12">
+        <h4><a href="/">Home</a></h4>
+        <h4>|</h4>
+        <h4><a href="/search">Search</a></h4>
+      </div>
+      <hr />
+      <form method="post" action="/book">
+        {% csrf_token %}
+        <table>
+          <tr>
+            <th><label for="title">Title</label></th>
+            <td><input type="text" name="title" id="title" required /></td>
+          </tr>
+          <tr>
+            <th><label for="author">Author</label></th>
+            <td><input type="text" name="author" id="author" required /></td>
+          </tr>
+          <tr>
+            <th><label for="description">Description</label></th>
+            <td>
+              <textarea
+                name="description"
+                id="title"
+                cols="25"
+                rows="10"
+                placeholder="describe your book"
+                required
+              ></textarea>
+            </td>
+          </tr>
+          <tr>
+            <td><label for=""></label></td>
+            <td><input type="submit" value="submit" /></td>
+          </tr>
+
+          <tr>
+            <td>
+              <h4><a href="/bookshow">Show List</a></h4>
+            </td>
+          </tr>
+        </table>
+      </form>
+    </div>
+    <hr />
+    <table>
+      <thead>
+        <tr>
+          <th>S.no</th>
+          <th>Title</th>
+          <th>Author</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for x in books %}
+        <tr>
+          <td>{{ x.id }}</td>
+          <td>{{ x.title }}</td>
+          <td>{{ x.author }}</td>
+          <td>{{ x.description }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </body>
+</html>
